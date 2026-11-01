@@ -12,7 +12,7 @@ export function ImpactSection() {
     <section id="impact" aria-labelledby="impact-title" className="relative overflow-clip py-24 sm:py-32">
       <div aria-hidden className="absolute -left-40 top-1/3 -z-10 size-[34rem] rounded-full bg-cyan/10 blur-[130px]" />
       <div aria-hidden className="absolute -right-40 bottom-0 -z-10 size-[30rem] rounded-full bg-violet/10 blur-[130px]" />
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="site-w">
         <SectionHeading id="impact-title" index="01" eyebrow="Professional Impact" title={<>A career measured in <span className="text-gradient">delivered work.</span></>} text="Figures taken from my project management and freelance development roles." />
 
         <div className="mt-16 grid lg:grid-cols-12 lg:gap-x-12">

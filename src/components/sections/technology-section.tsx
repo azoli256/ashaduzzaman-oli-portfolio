@@ -15,7 +15,7 @@ export function TechnologySection() {
   return (
     <section id="technology" aria-labelledby="tech-title" className="relative overflow-hidden bg-bg-2/70 py-24 sm:py-32">
       <div aria-hidden className="absolute inset-x-0 top-0 hairline" />
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="site-w">
         <SectionHeading id="tech-title" index="08" eyebrow="Technology" title={<>The platforms and <span className="text-gradient">infrastructure I work with.</span></>} text="Grouped by purpose: what each platform or discipline is used for in delivery." />
         <div className="mt-14 grid gap-4 lg:grid-cols-12">
           {main && (

@@ -40,7 +40,7 @@ export function ExpertiseSection() {
   return (
     <section id="expertise" aria-labelledby="expertise-title" className="relative py-24 sm:py-32">
       <div aria-hidden className="absolute inset-x-0 top-0 hairline" />
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="site-w">
         <SectionHeading id="expertise-title" index="03" eyebrow="Dual Expertise" title={<>Two disciplines. <span className="text-gradient">One delivery mindset.</span></>} text="Project management and web development carry equal weight in how I work. Each strengthens the other." />
 
         <div className="relative mt-14 grid gap-4 lg:grid-cols-2">

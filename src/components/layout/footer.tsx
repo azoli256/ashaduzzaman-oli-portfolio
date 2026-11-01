@@ -6,7 +6,7 @@ import { SocialLinks } from "@/components/ui/social-links";
 export function Footer() {
   return (
     <footer className="relative border-t border-line bg-bg-2/60">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_auto]">
+      <div className="site-w grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_auto]">
         <div>
           <p className="font-display text-xl font-extrabold tracking-tight">{profile.name}</p>
           <p className="mt-2 max-w-sm text-sm text-ink-2">{profile.title}</p>
@@ -31,7 +31,7 @@ export function Footer() {
         <SocialLinks />
       </div>
       <div className="border-t border-line">
-        <p className="mx-auto max-w-6xl px-5 py-6 text-xs text-muted sm:px-8">
+        <p className="site-w py-6 text-xs text-muted">
           © {new Date().getFullYear()} {profile.name}. All rights reserved. Third-party websites referenced belong to their respective owners.
         </p>
       </div>

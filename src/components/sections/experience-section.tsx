@@ -49,7 +49,7 @@ export function ExperienceSection() {
   const [lead, ...rest] = experience;
   return (
     <section id="experience" aria-labelledby="experience-title" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="site-w">
         <SectionHeading id="experience-title" index="07" eyebrow="Experience" title={<>My Professional <span className="text-gradient">Journey.</span></>} text="Roles overlap by design: I continue to build and consult while leading projects." />
 
         {/* Parallel-lane timeline, scaled to real dates */}

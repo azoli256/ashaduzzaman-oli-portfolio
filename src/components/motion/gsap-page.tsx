@@ -28,7 +28,7 @@ export function GsapPage() {
 
       // 2. Section headings: words rise out of a mask.
       q<HTMLElement>("main section h2").forEach((h) => {
-        const split = SplitText.create(h, { type: "words", mask: "words" });
+        const split = SplitText.create(h, { type: "words", mask: "words", maskClass: "split-mask" });
         // Gradient text does not survive being split: give each word inside a gradient span its own gradient.
         split.words.forEach((w) => {
           if (w.closest(".text-gradient")) w.classList.add("text-gradient");

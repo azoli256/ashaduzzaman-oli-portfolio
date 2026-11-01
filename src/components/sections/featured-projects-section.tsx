@@ -7,7 +7,7 @@ export function FeaturedProjectsSection() {
   const ordered = [...projects.filter((p) => p.featured), ...projects.filter((p) => !p.featured)];
   return (
     <section id="work" aria-labelledby="work-title" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="site-w">
         <SectionHeading id="work-title" index="05" eyebrow="Selected Work" title={<>Selected <span className="text-gradient">Digital Experiences.</span></>} text="A collection of website projects and digital solutions representing different industries, platforms, and business requirements." />
         <Reveal className="mt-14">
           <div className="mb-4 flex items-end justify-between gap-4">

@@ -11,7 +11,7 @@ export function TestimonialsSection() {
   const approved = testimonials.filter((t) => t.approved);
   return (
     <section id="trust" aria-labelledby="trust-title" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="site-w">
         <SectionHeading id="trust-title" index="09" eyebrow="Client Trust" title={<>Trusted by clients, <span className="text-gradient">review after review.</span></>} />
         <Reveal className="mt-12">
           <div className="surface relative overflow-hidden p-8 sm:p-12">

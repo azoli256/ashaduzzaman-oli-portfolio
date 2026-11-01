@@ -25,7 +25,7 @@ export function HeroSection() {
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(70%_80%_at_18%_45%,rgba(8,14,26,0.88),rgba(8,14,26,0.35)_55%,transparent_80%)]" />
       <div aria-hidden className="absolute -top-40 left-1/2 -z-20 h-[40rem] w-[60rem] -translate-x-1/2 rounded-full bg-blue/10 blur-[120px]" />
 
-      <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-5 pb-14 pt-28 sm:px-8 lg:pt-28">
+      <div className="site-w flex flex-1 flex-col justify-center pb-14 pt-28 lg:pt-28">
         <p className="rise inline-flex w-fit items-center gap-3 font-mono text-[0.72rem] uppercase tracking-[0.22em] text-cyan" style={d(40)}>
           <span aria-hidden className="relative flex size-2"><span className="pulse-dot absolute inline-flex size-full rounded-full bg-cyan" /><span className="relative size-2 rounded-full bg-cyan" /></span>
           {profile.title}

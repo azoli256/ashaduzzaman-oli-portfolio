@@ -17,7 +17,7 @@ export function ContactSection() {
       <div aria-hidden className="absolute inset-x-0 top-0 hairline" />
       <div aria-hidden className="bg-grid absolute inset-0 -z-10" />
       <div aria-hidden className="absolute left-1/2 top-1/2 -z-10 size-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan/10 blur-[130px]" />
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="site-w">
         <Reveal>
           <p className="eyebrow flex items-center gap-3"><span className="font-mono text-ink-2/70 tracking-normal">10</span><span aria-hidden className="h-px w-8 bg-cyan/60" />Contact</p>
           <h2 id="contact-title" className="h-hero mt-6 max-w-4xl">Have a Digital Project <span className="text-gradient">in Mind?</span></h2>

@@ -68,6 +68,7 @@ export function AboutScene({ paragraphs, eyebrow, heading }: { paragraphs: strin
       };
 
       const paragraphsEls = gsap.utils.toArray<HTMLElement>("[data-about-p]", copyEl);
+      const bar = copyEl.querySelector<HTMLElement>("[data-about-bar]");
       const mm = gsap.matchMedia();
 
       // Always-on idle motion for the rings; paused whenever the section is off-screen.
@@ -78,6 +79,30 @@ export function AboutScene({ paragraphs, eyebrow, heading }: { paragraphs: strin
           ring3 && gsap.to(ring3, { rotation: 360, svgOrigin: "500 500", duration: 220, repeat: -1, ease: "none" }),
         ].filter(Boolean) as gsap.core.Tween[];
         ScrollTrigger.create({ trigger: trackEl, start: "top bottom", end: "bottom top", onToggle: (self) => idle.forEach((t) => t.paused(!self.isActive)) });
+      });
+
+      // Mouse only: the orbit leans toward the pointer for depth.
+      mm.add("(min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)", () => {
+        gsap.set(orbitEl, { transformPerspective: 1000 });
+        const rx = gsap.quickTo(orbitEl, "rotationX", { duration: 0.7, ease: "power3.out" });
+        const ry = gsap.quickTo(orbitEl, "rotationY", { duration: 0.7, ease: "power3.out" });
+        const move = (e: PointerEvent) => {
+          const r = trackEl.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - window.innerHeight / 2) / window.innerHeight;
+          ry(px * 14);
+          rx(-py * 12);
+        };
+        const leave = () => {
+          rx(0);
+          ry(0);
+        };
+        trackEl.addEventListener("pointermove", move);
+        trackEl.addEventListener("pointerleave", leave);
+        return () => {
+          trackEl.removeEventListener("pointermove", move);
+          trackEl.removeEventListener("pointerleave", leave);
+        };
       });
 
       // Desktop: one long scrubbed timeline inside a sticky stage.
@@ -91,6 +116,7 @@ export function AboutScene({ paragraphs, eyebrow, heading }: { paragraphs: strin
         const tl = gsap.timeline({ scrollTrigger: { trigger: trackEl, start: "top top", end: "bottom bottom", scrub: 0.7, invalidateOnRefresh: true } });
         tl.to(state, { p: 1, ease: "none", duration: 1, onUpdate: () => place(state.p) }, 0);
         tl.to(words, { opacity: 1, ease: "none", duration: 0.1, stagger: { each: 0.9 / (n - 1) } }, 0);
+        if (bar) tl.fromTo(bar, { scaleY: 0 }, { scaleY: 1, ease: "none", duration: 1, transformOrigin: "top" }, 0);
         return () => {
           tl.scrollTrigger?.kill();
           tl.kill();
@@ -118,9 +144,9 @@ export function AboutScene({ paragraphs, eyebrow, heading }: { paragraphs: strin
 
   return (
     <div ref={track} className="relative lg:h-[430vh]">
-      <div className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:items-center">
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16 lg:py-0">
-          <div ref={orbit} className="relative mx-auto aspect-square w-full max-w-[34rem] select-none">
+      <div className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:items-center lg:pt-20">
+        <div className="site-w grid items-center gap-12 py-20 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16 lg:py-0">
+          <div ref={orbit} className="relative mx-auto aspect-square w-full max-w-[34rem] select-none lg:max-w-[40rem]">
             <svg viewBox="0 0 1000 1000" className="absolute inset-0 size-full" aria-hidden>
               <defs>
                 <radialGradient id="about-halo" cx="50%" cy="50%" r="50%">
@@ -154,17 +180,20 @@ export function AboutScene({ paragraphs, eyebrow, heading }: { paragraphs: strin
             ))}
           </div>
 
-          <div ref={copy}>
+          <div ref={copy} className="relative lg:pl-10">
+            <span aria-hidden className="absolute bottom-0 left-0 top-0 hidden w-px bg-line lg:block">
+              <span data-about-bar className="absolute inset-0 origin-top scale-y-0 bg-gradient-to-b from-cyan to-violet" />
+            </span>
             {eyebrow}
             {heading}
-            <div className="mt-6 space-y-4 text-[1.05rem] leading-relaxed text-ink-2 sm:text-lg lg:space-y-3.5 lg:text-[1rem] lg:leading-[1.6]">
+            <div className="mt-6 space-y-4 text-[1.05rem] leading-relaxed text-ink-2 sm:text-lg lg:space-y-3 lg:text-[1.02rem] lg:leading-[1.62]">
               {paragraphs.map((p, i) => (
-                <p key={i} data-about-p className={i === 0 ? "text-xl text-ink sm:text-[1.3rem] lg:text-[1.12rem]" : ""}>
+                <p key={i} data-about-p className={i === 0 ? "text-xl text-ink sm:text-[1.3rem] lg:text-[1.2rem] lg:leading-[1.5]" : ""}>
                   {p}
                 </p>
               ))}
             </div>
-            <Link href="/about" className="group mt-6 inline-flex min-h-11 items-center gap-2 font-display font-bold text-cyan">
+            <Link href="/about" className="group mt-5 inline-flex min-h-11 items-center gap-2 font-display font-bold text-cyan">
               Full professional profile <ArrowRight size={18} className="transition group-hover:translate-x-1" />
             </Link>
           </div>
