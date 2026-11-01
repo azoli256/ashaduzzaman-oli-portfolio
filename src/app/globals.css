@@ -363,3 +363,7 @@ body::after {
 .no-ring:focus-visible {
   outline: none;
 }
+
+.h-section.h-about {
+  font-size: clamp(2rem, 2.2vw + 1rem, 2.75rem);
+}

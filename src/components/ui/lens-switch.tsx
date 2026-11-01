@@ -16,7 +16,7 @@ const captions: Record<Lens, string> = {
 };
 
 /** Signature control: switches the hero network and the expertise pillars between disciplines. */
-export function LensSwitch({ className }: { className?: string }) {
+export function LensSwitch({ className, showCaption = true }: { className?: string; showCaption?: boolean }) {
   const { lens, setLens } = useLens();
   return (
     <div className={className}>
@@ -41,7 +41,7 @@ export function LensSwitch({ className }: { className?: string }) {
           );
         })}
       </div>
-      <p aria-live="polite" className="mt-3 min-h-[3.25rem] max-w-md text-[0.95rem] leading-relaxed text-ink-2">
+      <p aria-live="polite" className={cn(showCaption ? "mt-3 min-h-[3.25rem] max-w-md text-[0.95rem] leading-relaxed text-ink-2" : "sr-only")}>
         {captions[lens]}
       </p>
     </div>

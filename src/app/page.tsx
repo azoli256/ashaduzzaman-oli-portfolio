@@ -8,11 +8,13 @@ import { WorkflowSection } from "@/components/sections/workflow-section";
 import { ExperienceSection } from "@/components/sections/experience-section";
 import { TechnologySection } from "@/components/sections/technology-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
+import { GsapPage } from "@/components/motion/gsap-page";
 import { ContactSection } from "@/components/sections/contact-section";
 
 export default function HomePage() {
   return (
     <>
+      <GsapPage />
       <HeroSection />
       <ImpactSection />
       <AboutSection />

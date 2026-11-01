@@ -1,8 +1,5 @@
 import { profile } from "@/data/profile";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { Reveal } from "@/components/motion/reveal";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { AboutScene } from "./about-scene";
 
 export function AboutMonogram() {
   return (
@@ -25,24 +22,24 @@ export function AboutMonogram() {
 
 export function AboutSection() {
   return (
-    <section id="about" aria-labelledby="about-title" className="relative py-24 sm:py-32">
+    <section id="about" aria-labelledby="about-title" className="relative">
       <div aria-hidden className="absolute inset-x-0 top-0 hairline" />
-      <div className="mx-auto grid max-w-6xl gap-14 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-        <Reveal className="lg:order-1"><AboutMonogram /></Reveal>
-        <div>
-          <SectionHeading id="about-title" index="02" eyebrow="About" title={<>Strategy, technology <span className="text-gradient">and people.</span></>} />
-          <div className="mt-8 space-y-5 text-lg leading-relaxed text-ink-2">
-            {profile.summary.map((p, i) => (
-              <Reveal key={i} delay={0.05 * i} y={14}><p className={i === 0 ? "text-xl text-ink" : ""}>{p}</p></Reveal>
-            ))}
-          </div>
-          <Reveal className="mt-8">
-            <Link href="/about" className="group inline-flex min-h-11 items-center gap-2 font-display font-bold text-cyan">
-              Full professional profile <ArrowRight size={18} className="transition group-hover:translate-x-1" />
-            </Link>
-          </Reveal>
-        </div>
-      </div>
+      <div aria-hidden className="bg-grid absolute inset-0 opacity-40" />
+      <AboutScene
+        paragraphs={profile.summary}
+        eyebrow={
+          <p className="eyebrow flex items-center gap-3">
+            <span className="font-mono text-ink-2/70 tracking-normal">02</span>
+            <span aria-hidden className="h-px w-8 bg-cyan/60" />
+            About
+          </p>
+        }
+        heading={
+          <h2 id="about-title" className="h-section h-about mt-4">
+            Strategy, technology <span className="text-gradient">and people.</span>
+          </h2>
+        }
+      />
     </section>
   );
 }
