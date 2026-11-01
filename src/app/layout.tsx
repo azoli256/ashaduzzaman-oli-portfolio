@@ -4,6 +4,9 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
+import { LensProvider } from "@/components/motion/lens-context";
+import { AmbientCursor } from "@/components/motion/ambient-cursor";
+import { CommandPalette } from "@/components/layout/command-palette";
 import { siteUrl } from "@/data/profile";
 import { buildMetadata, personJsonLd } from "@/lib/metadata";
 
@@ -39,10 +42,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        <ScrollProgress />
-        <Navbar />
-        <main id="main">{children}</main>
-        <Footer />
+        <LensProvider>
+          <ScrollProgress />
+          <AmbientCursor />
+          <Navbar />
+          <CommandPalette />
+          <main id="main">{children}</main>
+          <Footer />
+        </LensProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

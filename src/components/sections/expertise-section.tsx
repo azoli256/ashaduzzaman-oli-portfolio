@@ -5,6 +5,7 @@ import type { PillarItem } from "@/types";
 import { BentoCard } from "@/components/ui/bento-card";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/motion/reveal";
+import { LensFocus } from "@/components/motion/lens-focus";
 import { WorkflowVisual } from "@/components/visuals/workflow-visual";
 import { TechnicalVisual } from "@/components/visuals/technical-visual";
 import { cn } from "@/lib/utils";
@@ -44,10 +45,10 @@ export function ExpertiseSection() {
 
         <div className="relative mt-14 grid gap-4 lg:grid-cols-2">
           <Reveal className="h-full">
-            <Pillar code="A" title="Project Management" lead="Leading cross-functional teams from discovery through post-launch support." accent="cyan" visual={<WorkflowVisual />} items={managementPillar} />
+            <LensFocus pillar="pm"><Pillar code="A" title="Project Management" lead="Leading cross-functional teams from discovery through post-launch support." accent="cyan" visual={<WorkflowVisual />} items={managementPillar} /></LensFocus>
           </Reveal>
           <Reveal delay={0.1} className="h-full">
-            <Pillar code="B" title="Web Development" lead="Hands-on building across the platforms and infrastructure businesses rely on." accent="blue" visual={<TechnicalVisual />} items={developmentPillar} />
+            <LensFocus pillar="dev"><Pillar code="B" title="Web Development" lead="Hands-on building across the platforms and infrastructure businesses rely on." accent="blue" visual={<TechnicalVisual />} items={developmentPillar} /></LensFocus>
           </Reveal>
           <div aria-hidden className="pointer-events-none absolute left-1/2 top-[11rem] z-10 hidden size-12 -translate-x-1/2 place-items-center rounded-full border border-line bg-bg font-display text-xl font-bold text-ink-2 lg:grid">+</div>
         </div>
