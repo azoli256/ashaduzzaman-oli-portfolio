@@ -1,4 +1,4 @@
-import { technicalAdvantage } from "@/data/expertise";
+import { advantageDetail, technicalAdvantage } from "@/data/expertise";
 import { Reveal } from "@/components/motion/reveal";
 import { AdvantageExplorer } from "./advantage-explorer";
 
@@ -26,7 +26,7 @@ export function TechnicalAdvantageSection() {
           </Reveal>
         </div>
 
-        <AdvantageExplorer items={technicalAdvantage} />
+        <AdvantageExplorer items={technicalAdvantage} detail={advantageDetail} />
       </div>
     </section>
   );

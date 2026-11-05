@@ -1,4 +1,4 @@
-import type { PillarItem } from "@/types";
+import type { AdvantageDetail, PillarItem } from "@/types";
 
 export const managementPillar: PillarItem[] = [
   { title: "Strategy & Planning", text: "Turning goals into a clear, prioritised plan." },
@@ -33,6 +33,17 @@ export const technicalAdvantage: PillarItem[] = [
   { title: "Set realistic scope & timelines", text: "Plans grounded in how things are really built." },
   { title: "Evaluate quality", text: "Judge deliverables with hands-on technical insight." },
   { title: "Bridge clients and teams", text: "Translate business goals into technical tasks." },
+];
+
+/** Illustrative examples for each technical-advantage point: what a client says, what it means technically, and the result. */
+export const advantageDetail: AdvantageDetail[] = [
+  { label: "Requirements", says: "We need a booking page.", means: ["Forms", "Availability logic", "Payments", "Email alerts", "Data storage"], outcome: "Requirements are written down before any work starts." },
+  { label: "Dev talk", says: "Make the site faster.", means: ["Which pages?", "Image weight", "Scripts", "Hosting", "Measure first"], outcome: "Developers get clear tasks with a way to check them." },
+  { label: "Complexity", says: "It's just a login button.", means: ["Authentication", "Password reset", "Sessions", "Security"], outcome: "Estimates reflect the real work, not the surface." },
+  { label: "Risks", says: "We launch on Friday.", means: ["API limits", "Browser testing", "Data migration", "Third parties"], outcome: "Risks are logged early, each with a fallback." },
+  { label: "Scope", says: "Can we add one more feature?", means: ["What it touches", "What it delays", "What to retest"], outcome: "Every change shows its trade-off in time, scope or cost." },
+  { label: "Quality", says: "Is it done?", means: ["Matches the brief", "Works on devices", "Handles errors", "Loads fast"], outcome: "Deliverables are reviewed against a checklist, not a feeling." },
+  { label: "Bridge", says: "We want more leads.", means: ["Tracking", "Page speed", "Form flow", "CRM hand-off"], outcome: "One shared plan that clients and developers both understand." },
 ];
 
 export const lifecycle: PillarItem[] = [

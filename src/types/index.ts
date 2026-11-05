@@ -84,3 +84,4 @@ export type TechGroup = {
 };
 
 export type PillarItem = { title: string; text: string };
+export type AdvantageDetail = { label: string; says: string; means: string[]; outcome: string };
