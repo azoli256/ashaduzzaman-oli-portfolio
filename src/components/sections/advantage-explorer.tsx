@@ -6,7 +6,7 @@ import type { AdvantageDetail, PillarItem } from "@/types";
 import { usePrefersReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
-const AUTO_MS = 7000;
+const AUTO_MS = 3500;
 
 /** Business request on the left, technical translation on the right. Shared by the HUD panel and the mobile accordion. */
 function Translation({ d, compact = false }: { d: AdvantageDetail; compact?: boolean }) {
@@ -50,8 +50,9 @@ export function AdvantageExplorer({ items, detail }: { items: PillarItem[]; deta
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [dir, setDir] = useState(1);
+  const [hover, setHover] = useState(false);
   const last = items.length - 1;
-  const autoOn = playing && !reduce && inView;
+  const autoOn = playing && !reduce && inView && !hover;
 
   const go = useCallback(
     (i: number, manual = true) => {
@@ -183,7 +184,7 @@ export function AdvantageExplorer({ items, detail }: { items: PillarItem[]; deta
         </ol>
 
         {/* HUD panel (large screens) */}
-        <div className="relative hidden lg:col-span-7 lg:block">
+        <div onPointerEnter={(e) => e.pointerType === "mouse" && setHover(true)} onPointerLeave={() => setHover(false)} className="relative hidden lg:col-span-7 lg:block">
           <div className="surface surface-blur relative flex h-full min-h-[27rem] flex-col justify-between overflow-hidden !rounded-3xl p-9">
             <div aria-hidden className="bg-grid absolute inset-0 opacity-60" />
             <div aria-hidden className="absolute -right-24 -top-24 size-80 rounded-full bg-cyan/15 blur-[90px]" />
