@@ -9,6 +9,7 @@ import { ExperienceSection } from "@/components/sections/experience-section";
 import { TechnologySection } from "@/components/sections/technology-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { GsapPage } from "@/components/motion/gsap-page";
+import { FaqSection } from "@/components/sections/faq-section";
 import { ContactSection } from "@/components/sections/contact-section";
 
 export default function HomePage() {
@@ -25,6 +26,7 @@ export default function HomePage() {
       <ExperienceSection />
       <TechnologySection />
       <TestimonialsSection />
+      <FaqSection />
       <ContactSection />
     </>
   );

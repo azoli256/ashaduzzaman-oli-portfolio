@@ -435,12 +435,34 @@ body::after {
   }
 }
 .portrait-fade {
-  -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+}
+.scan-line {
+  background: linear-gradient(to bottom, transparent, rgba(34, 197, 234, 0.1) 70%, rgba(34, 197, 234, 0.45) 98%, transparent);
+  animation: scan 5.5s ease-in-out infinite;
+}
+@keyframes scan {
+  0% {
+    top: -4%;
+    opacity: 0;
+  }
+  15%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: 96%;
+    opacity: 0;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .halo-spin,
-  .chip-float {
+  .chip-float,
+  .scan-line {
     animation: none;
+  }
+  .scan-line {
+    display: none;
   }
 }

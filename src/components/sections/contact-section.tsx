@@ -19,7 +19,7 @@ export function ContactSection() {
       <div aria-hidden className="absolute left-1/2 top-1/2 -z-10 size-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan/10 blur-[130px]" />
       <div className="site-w">
         <Reveal>
-          <p className="eyebrow flex items-center gap-3"><span className="font-mono text-ink-2/70 tracking-normal">10</span><span aria-hidden className="h-px w-8 bg-cyan/60" />Contact</p>
+          <p className="eyebrow flex items-center gap-3"><span className="font-mono text-ink-2/70 tracking-normal">11</span><span aria-hidden className="h-px w-8 bg-cyan/60" />Contact</p>
           <h2 id="contact-title" className="h-hero mt-6 max-w-4xl">Have a Digital Project <span className="text-gradient">in Mind?</span></h2>
           <p className="mt-7 max-w-2xl text-lg text-ink-2 sm:text-xl">Whether you&apos;re looking for experienced project leadership, technical web development expertise, or someone who understands both sides of digital delivery, let&apos;s connect.</p>
         </Reveal>
