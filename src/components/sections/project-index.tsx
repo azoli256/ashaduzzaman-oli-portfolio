@@ -34,7 +34,7 @@ export function ProjectIndex({ projects }: { projects: Project[] }) {
           const inner = (
             <>
               <span className="font-mono text-sm text-muted">{String(i + 1).padStart(2, "0")}</span>
-              <span className="font-display text-2xl font-extrabold tracking-tight transition-transform duration-500 ease-out group-hover:translate-x-3 sm:text-4xl lg:text-5xl">
+              <span className="min-w-0 font-display text-2xl font-extrabold tracking-tight transition-transform duration-500 ease-out group-hover:translate-x-3 sm:text-3xl md:text-4xl lg:text-5xl">
                 {p.name}
               </span>
               <span aria-hidden className="relative block w-20 overflow-hidden rounded-lg border border-line bg-bg-2 transition duration-500 group-hover:border-cyan/50 group-hover:shadow-[0_0_30px_-8px_rgba(34,197,234,0.6)] sm:w-32">

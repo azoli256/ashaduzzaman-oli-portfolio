@@ -269,8 +269,8 @@ section[id] {
 .h-mega {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.7rem, 6vw + 0.5rem, 6.8rem);
-  line-height: 1.05;
+  font-size: clamp(2.3rem, 3.9vw + 0.7rem, 4.9rem);
+  line-height: 1.06;
   letter-spacing: -0.045em;
   text-wrap: balance;
 }
@@ -410,4 +410,37 @@ body::after {
 .h-section.h-adv {
   font-size: clamp(2rem, 2.6vw + 0.9rem, 3.6rem);
   line-height: 1.16;
+}
+
+/* ---------- Hero portrait ---------- */
+.halo-spin {
+  animation: halo-spin 22s linear infinite;
+}
+@keyframes halo-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.chip-float {
+  animation: chip-float 6s ease-in-out infinite;
+  animation-delay: calc(var(--d, 0) * 1ms);
+}
+@keyframes chip-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+.portrait-fade {
+  -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .halo-spin,
+  .chip-float {
+    animation: none;
+  }
 }
