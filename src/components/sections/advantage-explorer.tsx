@@ -6,7 +6,7 @@ import type { AdvantageDetail, PillarItem } from "@/types";
 import { cn } from "@/lib/utils";
 
 /** Scroll distance (in viewport heights) that each step occupies on large screens. */
-const STEP_VH = 55;
+const STEP_VH = 42;
 
 /** Business request on the left, technical translation on the right. Shared by the HUD panel and the mobile accordion. */
 function Translation({ d, compact = false }: { d: AdvantageDetail; compact?: boolean }) {

@@ -143,7 +143,7 @@ export function AboutScene({ paragraphs, eyebrow, heading }: { paragraphs: strin
   );
 
   return (
-    <div ref={track} className="relative lg:h-[430vh]">
+    <div ref={track} className="relative lg:h-[290vh]">
       <div className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:items-center lg:pt-20">
         <div className="site-w grid items-center gap-12 py-20 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16 lg:py-0">
           <div ref={orbit} className="relative mx-auto aspect-square w-full max-w-[34rem] select-none lg:max-w-[40rem]">

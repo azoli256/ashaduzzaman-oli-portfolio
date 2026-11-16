@@ -46,7 +46,7 @@ export function WorkflowPinned({ steps }: { steps: PillarItem[] }) {
   };
 
   return (
-    <div ref={ref} style={{ height: `${n * 70}vh` }} className="relative">
+    <div ref={ref} style={{ height: `${n * 48}vh` }} className="relative">
       <div className="sticky top-0 flex h-screen items-center">
         <div className="site-w grid grid-cols-12 items-center gap-10">
           {/* stage card */}
