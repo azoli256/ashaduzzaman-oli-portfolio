@@ -37,14 +37,17 @@ export function ProjectIndex({ projects }: { projects: Project[] }) {
               <span className="font-display text-2xl font-extrabold tracking-tight transition-transform duration-500 ease-out group-hover:translate-x-3 sm:text-4xl lg:text-5xl">
                 {p.name}
               </span>
-              <span className="hidden text-ink-2 sm:block">{hostname(p.url)}</span>
+              <span aria-hidden className="relative block w-20 overflow-hidden rounded-lg border border-line bg-bg-2 transition duration-500 group-hover:border-cyan/50 group-hover:shadow-[0_0_30px_-8px_rgba(34,197,234,0.6)] sm:w-32">
+                <ProjectPreview project={p} className="aspect-[16/10] w-full transition-transform duration-700 ease-out group-hover:scale-[1.06]" />
+              </span>
+              <span className="hidden text-ink-2 md:block">{hostname(p.url)}</span>
               <span className="flex items-center justify-end gap-2 text-sm text-ink-2 transition-colors group-hover:text-cyan">
                 {p.featured && <span className="hidden rounded-full border border-cyan/30 px-2.5 py-0.5 font-mono text-[0.65rem] uppercase tracking-wider text-cyan sm:inline">Featured</span>}
                 {study ? <ArrowRight size={22} /> : <ArrowUpRight size={22} className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />}
               </span>
             </>
           );
-          const cls = cn("group grid grid-cols-[2.2rem_1fr_auto] items-center gap-3 border-b border-line py-5 transition-colors hover:bg-white/[0.025] sm:grid-cols-[3.5rem_1fr_14rem_auto] sm:px-2 sm:py-7");
+          const cls = cn("group grid grid-cols-[2.2rem_1fr_auto_auto] items-center gap-3 border-b border-line py-4 transition-colors hover:bg-white/[0.025] sm:grid-cols-[3.5rem_1fr_8rem_7rem] sm:gap-5 sm:px-2 sm:py-5 md:grid-cols-[3.5rem_1fr_8rem_11rem_7rem]");
           return (
             <li key={p.slug} onPointerEnter={(e) => e.pointerType === "mouse" && setActive(p)} onFocus={() => setActive(p)} onBlur={() => setActive(null)}>
               {study ? (
