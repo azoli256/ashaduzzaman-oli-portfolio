@@ -32,7 +32,7 @@ export function HeroSection() {
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_80%_at_20%_45%,rgba(8,14,26,0.9),rgba(8,14,26,0.3)_60%,transparent_85%)]" />
       <div aria-hidden className="absolute -top-40 left-1/2 -z-20 h-[40rem] w-[60rem] -translate-x-1/2 rounded-full bg-blue/10 blur-[120px]" />
 
-      <div className="site-w grid flex-1 items-center gap-2 pt-28 lg:grid-cols-[1fr_1fr] lg:gap-6">
+      <div className="site-w grid flex-1 items-center gap-2 pt-24 lg:grid-cols-[1fr_1fr] lg:gap-6">
         <div className="pb-6 lg:pb-14">
           <p className="rise inline-flex w-fit items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.22em] text-cyan" style={d(40)}>
             <span aria-hidden className="relative flex size-2"><span className="pulse-dot absolute inline-flex size-full rounded-full bg-cyan" /><span className="relative size-2 rounded-full bg-cyan" /></span>
@@ -64,12 +64,12 @@ export function HeroSection() {
         </div>
 
         {/* portrait */}
-        <div className="rise relative mx-auto flex w-full items-end justify-center self-end" style={d(300)}>
+        <div className="rise relative mx-auto flex w-full items-end justify-center self-end max-lg:order-first" style={d(300)}>
           <span aria-hidden className="h-outline pointer-events-none absolute left-1/2 top-[6%] -translate-x-1/2 select-none font-display text-[clamp(9rem,24vw,22rem)] font-extrabold leading-none tracking-tighter">OLI</span>
           <div aria-hidden className="halo-spin absolute left-1/2 top-[42%] aspect-square w-[105%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[conic-gradient(from_0deg,transparent_0%,rgba(34,197,234,0.7)_16%,transparent_36%,rgba(139,92,246,0.65)_60%,transparent_80%)] [mask-image:radial-gradient(farthest-side,transparent_calc(100%-2px),#000_calc(100%-1px))]" />
           <div aria-hidden className="absolute left-1/2 top-[46%] aspect-square w-[80%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(34,197,234,0.25),rgba(139,92,246,0.15)_50%,transparent_70%)] blur-2xl" />
 
-          <div className="relative h-[27rem] sm:h-[34rem] lg:h-[min(48rem,82svh)]" style={{ aspectRatio: "725 / 1290" }}>
+          <div className="relative h-[22rem] sm:h-[37.4rem] lg:h-[min(52.8rem,90svh)]" style={{ aspectRatio: "725 / 1290" }}>
             {["left-0 top-0 border-l-2 border-t-2", "right-0 top-0 border-r-2 border-t-2"].map((c) => (
               <span key={c} aria-hidden className={cn("absolute z-10 size-6 border-cyan/70", c)} />
             ))}
@@ -83,7 +83,7 @@ export function HeroSection() {
             />
             <span aria-hidden className="scan-line pointer-events-none absolute inset-x-0 z-10 h-8" />
             {chips.map((c) => (
-              <span key={c.label} className={cn("chip-float absolute z-20 inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-bg/75 px-3 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink backdrop-blur-md sm:text-[0.7rem]", c.pos)} style={d(c.delay)}>
+              <span key={c.label} className={cn("chip-float absolute max-sm:hidden z-20 inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-bg/75 px-3 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink backdrop-blur-md sm:text-[0.7rem]", c.pos)} style={d(c.delay)}>
                 <span aria-hidden className={cn("size-1.5 rounded-full", c.dot)} />
                 {c.label}
                 <span aria-hidden className={cn("absolute top-1/2 hidden h-px w-10 bg-gradient-to-r sm:block", c.line)} />

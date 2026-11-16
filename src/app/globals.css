@@ -439,7 +439,7 @@ body::after {
   mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
 }
 .scan-line {
-  background: linear-gradient(to bottom, transparent, rgba(34, 197, 234, 0.1) 70%, rgba(34, 197, 234, 0.45) 98%, transparent);
+  background: linear-gradient(to bottom, transparent, rgba(34, 197, 234, 0.05) 70%, rgba(34, 197, 234, 0.2) 98%, transparent);
   animation: scan 5.5s ease-in-out infinite;
 }
 @keyframes scan {
