@@ -1,5 +1,6 @@
 import { RatingBadge } from "@/components/ui/rating-badge";
 import { metrics } from "@/data/metrics";
+import { Fragment } from "react";
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
 import { profile } from "@/data/profile";
@@ -43,10 +44,13 @@ export function HeroSection() {
 
           <h1 id="hero-title" className="h-mega mt-4 max-w-[14ch]">
             {words.map((w, i) => (
-              <span key={w.t} className="rise inline-block pr-[0.22em]" style={d(120 + i * 90)}>
-                <span className={w.g ? "text-gradient" : undefined}>{w.t}</span>
-              </span>
+              <Fragment key={w.t}>
+                <span className="rise inline-block pr-[0.22em]" style={d(120 + i * 90)}>
+                  <span className={w.g ? "text-gradient" : undefined}>{w.t}</span>
+                </span>{" "}
+              </Fragment>
             ))}
+            <span className="sr-only"> — Ashaduzzaman Oli, Digital Project Manager and web developer in Dhaka, Bangladesh</span>
           </h1>
 
           <p className="rise mt-5 max-w-md text-base leading-relaxed text-ink-2" style={d(640)}>
@@ -81,7 +85,7 @@ export function HeroSection() {
             ))}
             <Image
               src="/images/oli.webp"
-              alt="Ashaduzzaman Oli"
+              alt="Ashaduzzaman Oli, Digital Project Manager and web developer"
               fill
               priority
               sizes="(min-width:1024px) 34rem, 22rem"

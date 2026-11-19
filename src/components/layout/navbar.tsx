@@ -55,7 +55,7 @@ export function Navbar() {
         )}
       >
         <Link href="/" aria-label={`${profile.name} — home`} className="group flex items-center gap-3">
-          <span className="font-display text-base font-extrabold tracking-tight sm:text-[1.05rem]">
+          <span className="whitespace-nowrap font-display text-base font-extrabold tracking-tight sm:text-[1.05rem]">
             {profile.name.split(" ")[0]} <span className="text-gradient">{profile.name.split(" ").slice(1).join(" ")}</span>
           </span>
         </Link>
@@ -69,7 +69,7 @@ export function Navbar() {
                   href={item.href}
                   aria-current={on ? "location" : undefined}
                   className={cn(
-                    "relative block rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                    "relative block rounded-full px-3 py-2 text-sm xl:px-4 font-medium transition-colors",
                     on ? "text-ink" : "text-ink-2 hover:text-ink",
                   )}
                 >
@@ -92,14 +92,14 @@ export function Navbar() {
             type="button"
             onClick={() => window.dispatchEvent(new Event(OPEN_PALETTE_EVENT))}
             aria-label="Open quick navigation (Ctrl or Command plus K)"
-            className="hidden min-h-10 items-center gap-2 rounded-full border border-line bg-white/[0.03] px-3.5 text-sm text-ink-2 transition hover:border-cyan/50 hover:text-ink lg:inline-flex"
+            className="hidden min-h-10 items-center gap-2 whitespace-nowrap rounded-full border border-line bg-white/[0.03] px-3.5 text-sm text-ink-2 transition hover:border-cyan/50 hover:text-ink xl:inline-flex"
           >
             Search
             <kbd className="rounded-md border border-line px-1.5 py-0.5 font-mono text-[0.68rem] text-muted">Ctrl K</kbd>
           </button>
           <Link
             href="/#contact"
-            className="hidden min-h-10 items-center rounded-full bg-gradient-to-r from-cyan to-blue px-5 font-display text-sm font-bold text-[#04202a] shadow-[0_8px_30px_-10px_rgba(34,197,234,0.7)] transition hover:brightness-110 sm:inline-flex"
+            className="hidden min-h-10 items-center whitespace-nowrap rounded-full bg-gradient-to-r from-cyan to-blue px-5 font-display text-sm font-bold text-[#04202a] shadow-[0_8px_30px_-10px_rgba(34,197,234,0.7)] transition hover:brightness-110 sm:inline-flex"
           >
             Let&apos;s Talk
           </Link>

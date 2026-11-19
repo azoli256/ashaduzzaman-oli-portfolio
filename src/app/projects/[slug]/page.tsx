@@ -18,9 +18,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const p = getProject(slug);
   if (!p) return {};
   return buildMetadata({
-    title: p.name,
+    title: `${p.name} Website Project`,
     path: `/projects/${p.slug}`,
-    description: p.overview ?? `${p.name} — a website referenced in the portfolio of Ashaduzzaman Oli.`,
+    description: p.overview ?? `Browse the ${p.name} website (${hostname(p.url)}) inside the portfolio of Ashaduzzaman Oli, Digital Project Manager and web developer.`,
   });
 }
 

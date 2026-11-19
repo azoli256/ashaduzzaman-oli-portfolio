@@ -8,7 +8,7 @@ import { LensProvider } from "@/components/motion/lens-context";
 import { AmbientCursor } from "@/components/motion/ambient-cursor";
 import { CommandPalette } from "@/components/layout/command-palette";
 import { siteUrl } from "@/data/profile";
-import { buildMetadata, personJsonLd } from "@/lib/metadata";
+import { buildMetadata, personJsonLd, websiteJsonLd } from "@/lib/metadata";
 
 const manrope = localFont({
   src: "./fonts/manrope-latin-wght-normal.woff2",
@@ -52,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </LensProvider>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([personJsonLd, websiteJsonLd]) }}
         />
       </body>
     </html>

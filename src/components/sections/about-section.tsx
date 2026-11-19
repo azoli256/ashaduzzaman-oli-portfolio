@@ -1,4 +1,5 @@
 import { profile } from "@/data/profile";
+import Image from "next/image";
 import { AboutScene } from "./about-scene";
 
 export function AboutMonogram() {
@@ -11,7 +12,7 @@ export function AboutMonogram() {
         <circle cx="160" cy="180" r="76" fill="none" stroke="#518BFF" strokeOpacity="0.45" />
         <circle cx="160" cy="70" r="5" fill="#22C5EA" /><circle cx="270" cy="180" r="5" fill="#518BFF" /><circle cx="160" cy="290" r="5" fill="#8575F7" />
       </svg>
-      <span className="absolute inset-x-0 top-[34%] text-center font-display text-7xl font-extrabold tracking-tighter text-gradient">AO</span>
+      <Image src="/images/oli.webp" alt="Ashaduzzaman Oli" width={725} height={1290} sizes="20rem" className="absolute bottom-0 left-1/2 h-[78%] w-auto max-w-none -translate-x-1/2" />
       <div className="absolute inset-x-0 bottom-0 border-t border-line bg-bg/60 p-5 backdrop-blur-md">
         <p className="font-display font-bold">{profile.name}</p>
         <p className="text-sm text-ink-2">{profile.publicLocation}</p>

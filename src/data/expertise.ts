@@ -1,7 +1,7 @@
 import type { AdvantageDetail, PillarItem } from "@/types";
 
 export const managementPillar: PillarItem[] = [
-  { title: "Strategy & Planning", text: "Turning goals into a clear, prioritised plan." },
+  { title: "Strategy & Planning", text: "Turning goals into a clear, prioritized plan." },
   { title: "Project Discovery", text: "Understanding the business need before the build." },
   { title: "Requirements & Scope", text: "Defining what is in, what is out, and why." },
   { title: "Team Coordination", text: "Aligning designers, developers and QA." },
@@ -28,7 +28,7 @@ export const developmentPillar: PillarItem[] = [
 export const technicalAdvantage: PillarItem[] = [
   { title: "Understand technical requirements", text: "Read a brief the way a developer will." },
   { title: "Communicate with developers", text: "Speak their language, ask better questions." },
-  { title: "Recognise complexity", text: "Know what is simple, and what only looks simple." },
+  { title: "Recognize complexity", text: "Know what is simple, and what only looks simple." },
   { title: "Identify technical risks", text: "Surface problems before they become delays." },
   { title: "Set realistic scope & timelines", text: "Plans grounded in how things are really built." },
   { title: "Evaluate quality", text: "Judge deliverables with hands-on technical insight." },

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { profile, siteUrl } from "@/data/profile";
 
-export const siteTitle = `${profile.name} | ${profile.title}`;
+export const siteTitle = `${profile.name} | Digital Project Manager & Web Developer`;
 export const siteDescription =
-  "Ashaduzzaman Oli is an experienced Digital Project Manager and Web Development Professional specializing in project leadership, technical solutions, and digital delivery.";
+  "Ashaduzzaman Oli is a Digital Project Manager and web developer in Dhaka with 11+ years of experience. 400+ projects managed, 2,300+ built. See selected work.";
 
 export function buildMetadata({
   title,
@@ -35,11 +35,15 @@ export const personJsonLd = {
   url: siteUrl,
   email: `mailto:${profile.email}`,
   address: { "@type": "PostalAddress", addressLocality: "Dhaka", addressCountry: "BD" },
+  image: `${siteUrl}/images/oli.webp`,
+  description: siteDescription,
+  worksFor: { "@type": "Organization", name: "SEOPage1" },
   sameAs: [profile.linkedin, profile.fiverr],
   knowsAbout: [
     "Project Management",
-    "Agile Coordination",
     "Web Development",
+    "Technical Consulting",
+    "Website Migration",
     "WordPress",
     "Shopify",
     "WooCommerce",
@@ -47,4 +51,13 @@ export const personJsonLd = {
     "Wix",
     "PHP",
   ],
+};
+
+export const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: profile.name,
+  url: siteUrl,
+  description: siteDescription,
+  inLanguage: "en",
 };

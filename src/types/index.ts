@@ -3,7 +3,6 @@ export type NavItem = { label: string; href: string; id: string };
 export type Profile = {
   name: string;
   shortName: string;
-  initials: string;
   title: string;
   location: string;
   /** City + country only. This is what is shown publicly. */
@@ -14,9 +13,6 @@ export type Profile = {
   /** Phone is kept private. Set `showPhone` to true to display it publicly. */
   phone: string;
   showPhone: boolean;
-  tagline: string;
-  heroHeadline: string;
-  heroSupport: string;
   summary: string[];
 };
 
@@ -76,14 +72,6 @@ export type ExperienceItem = {
   kind: "management" | "development";
   summary: string;
   highlights: string[];
-};
-
-export type TechGroup = {
-  title: string;
-  description: string;
-  items: string[];
-  /** When false the group is hidden until the owner confirms its contents. */
-  confirmed: boolean;
 };
 
 export type PillarItem = { title: string; text: string };

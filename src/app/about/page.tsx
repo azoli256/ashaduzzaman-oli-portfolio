@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import { AboutMonogram } from "@/components/sections/about-section";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Professional Profile",
+  title: "Profile: Project Manager & Web Developer",
   path: "/about",
-  description: "Experience, roles and approach of Ashaduzzaman Oli, Digital Project Manager and Web Development Professional.",
+  description: "Career profile of Ashaduzzaman Oli: Digital Project Manager at SEOPage1 and freelance web developer with 11+ years of experience, 400+ projects managed and 2,300+ built.",
 });
 
 export default function AboutPage() {

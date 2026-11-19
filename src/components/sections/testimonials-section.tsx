@@ -20,7 +20,7 @@ export function TestimonialsSection() {
               <AnimatedCounter value={metrics.fiverrReviews} className="font-display text-[clamp(4.5rem,12vw,8rem)] font-extrabold leading-none tracking-[-0.05em] text-gradient" />
               <div className="max-w-md">
                 <p className="flex items-center gap-2 font-display text-xl font-bold"><ShieldCheck size={20} className="text-cyan" aria-hidden /> Verified Fiverr reviews</p>
-                <p className="mt-2 text-ink-2">Feedback from clients across web development and technical consulting projects, published openly on Fiverr.</p>
+                <p className="mt-2 text-ink-2">Rated {metrics.fiverrRating} out of 5 on Fiverr. Feedback from clients across web development and technical consulting projects, published openly on Fiverr.</p>
               </div>
               <a href={profile.fiverr} {...externalProps} className="group inline-flex min-h-12 items-center gap-2 rounded-full bg-gradient-to-r from-cyan to-blue px-6 font-display font-bold text-[#04202a] transition hover:brightness-110">
                 Read reviews on Fiverr <ArrowUpRight size={18} className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
