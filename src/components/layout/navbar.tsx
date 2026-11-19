@@ -25,12 +25,15 @@ export function Navbar() {
 
   useEffect(() => {
     if (!isHome) return;
-    const sections = navItems
-      .map((n) => document.getElementById(n.id))
+    // Sections without their own nav entry belong to the nav item above them.
+    const owner: Record<string, string> = { impact: "", advantage: "expertise", trust: "experience" };
+    const ids = [...navItems.map((n) => n.id), ...Object.keys(owner)];
+    const sections = ids
+      .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el));
     const io = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) if (e.isIntersecting) setActive(e.target.id);
+        for (const e of entries) if (e.isIntersecting) setActive(e.target.id in owner ? owner[e.target.id]! : e.target.id);
       },
       { rootMargin: "-45% 0px -50% 0px" },
     );
@@ -54,7 +57,7 @@ export function Navbar() {
             : "border-transparent bg-transparent",
         )}
       >
-        <Link href="/" aria-label={`${profile.name} — home`} className="group flex items-center gap-3">
+        <Link href="/#top" aria-label={`${profile.name} — back to top`} className="group flex items-center gap-3">
           <span className="whitespace-nowrap font-display text-base font-extrabold tracking-tight sm:text-[1.05rem]">
             {profile.name.split(" ")[0]} <span className="text-gradient">{profile.name.split(" ").slice(1).join(" ")}</span>
           </span>

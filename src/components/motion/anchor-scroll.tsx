@@ -45,7 +45,7 @@ export function AnchorScroll() {
       const el = document.getElementById(decodeURIComponent(url.hash.slice(1)));
       if (!el) return;
       e.preventDefault();
-      history.pushState(null, "", url.hash);
+      history.pushState(null, "", url.hash === "#top" ? url.pathname : url.hash);
       go(el);
     };
 
