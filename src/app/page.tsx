@@ -6,7 +6,6 @@ import { TechnicalAdvantageSection } from "@/components/sections/technical-advan
 import { FeaturedProjectsSection } from "@/components/sections/featured-projects-section";
 import { WorkflowSection } from "@/components/sections/workflow-section";
 import { ExperienceSection } from "@/components/sections/experience-section";
-import { TechnologySection } from "@/components/sections/technology-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { GsapPage } from "@/components/motion/gsap-page";
 import { FaqSection } from "@/components/sections/faq-section";
@@ -24,7 +23,6 @@ export default function HomePage() {
       <FeaturedProjectsSection />
       <WorkflowSection />
       <ExperienceSection />
-      <TechnologySection />
       <TestimonialsSection />
       <FaqSection />
       <ContactSection />

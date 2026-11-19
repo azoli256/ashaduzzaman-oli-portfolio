@@ -12,7 +12,7 @@ export function TestimonialsSection() {
   return (
     <section id="trust" aria-labelledby="trust-title" className="relative py-24 sm:py-32">
       <div className="site-w">
-        <SectionHeading id="trust-title" index="09" eyebrow="Client Trust" title={<>Trusted by clients, <span className="text-gradient">review after review.</span></>} />
+        <SectionHeading id="trust-title" index="08" eyebrow="Client Trust" title={<>Trusted by clients, <span className="text-gradient">review after review.</span></>} />
         <Reveal className="mt-12">
           <div className="surface relative overflow-hidden p-8 sm:p-12">
             <div aria-hidden className="absolute -left-24 top-0 size-96 rounded-full bg-blue/15 blur-[100px]" />

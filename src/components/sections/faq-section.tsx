@@ -18,7 +18,7 @@ export function FaqSection() {
         <div className="lg:sticky lg:top-28 lg:self-start">
           <Reveal>
             <p className="eyebrow flex items-center gap-3">
-              <span className="font-mono text-ink-2/70 tracking-normal">10</span>
+              <span className="font-mono text-ink-2/70 tracking-normal">09</span>
               <span aria-hidden className="h-px w-8 bg-cyan/60" />
               FAQ
             </p>

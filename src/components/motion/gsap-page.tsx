@@ -63,7 +63,6 @@ export function GsapPage() {
         ["#expertise", "li"],
         ["#advantage", "li"],
         ["#experience", "li"],
-        ["#technology", "li"],
         ["#work", "ul > li"],
         ["#trust", "li"],
       ];
