@@ -83,15 +83,27 @@ export function HeroSection() {
             {["left-0 top-0 border-l-2 border-t-2", "right-0 top-0 border-r-2 border-t-2"].map((c) => (
               <span key={c} aria-hidden className={cn("absolute z-10 size-6 border-cyan/70", c)} />
             ))}
-            <Image
-              src="/images/oli.webp"
-              alt="Ashaduzzaman Oli, Digital Project Manager and web developer"
-              fill
-              priority
-              sizes="(min-width:1024px) 34rem, 22rem"
-              className="portrait-fade object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.55)]"
-            />
-            <span aria-hidden className="scan-line pointer-events-none absolute inset-x-0 z-10 h-8" />
+            <div className="portrait-fade absolute inset-0">
+              {/* Layer 1: cold blue hologram state. Layer 2: true colour, revealed top-to-bottom by the scan. */}
+              <Image
+                src="/images/oli.webp"
+                alt=""
+                aria-hidden
+                fill
+                priority
+                sizes="(min-width:1024px) 34rem, 22rem"
+                className="portrait-blue object-contain object-bottom"
+              />
+              <Image
+                src="/images/oli.webp"
+                alt="Ashaduzzaman Oli, Digital Project Manager and web developer"
+                fill
+                priority
+                sizes="(min-width:1024px) 34rem, 22rem"
+                className="portrait-reveal object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.55)]"
+              />
+              <span aria-hidden className="scan-sweep pointer-events-none absolute inset-x-[-6%] z-10" />
+            </div>
             {chips.map((c) => (
               <span key={c.label} className={cn("chip-float absolute max-sm:hidden z-20 inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-white/15 bg-bg/75 px-3 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink backdrop-blur-md sm:text-[0.7rem]", c.pos)} style={d(c.delay)}>
                 <span aria-hidden className={cn("size-1.5 rounded-full", c.dot)} />
