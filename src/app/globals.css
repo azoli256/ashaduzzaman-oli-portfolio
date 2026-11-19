@@ -438,15 +438,15 @@ body::after {
   -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
   mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
 }
-/* Portrait scan: starts blurred, a scan line sweeps top to bottom over ~10s and brings the photo into sharp focus. */
+/* Portrait scan: starts blurred, a scan line sweeps top to bottom over ~7.5s and brings the photo into sharp focus. */
 .portrait-blue {
   filter: blur(16px) brightness(0.85) saturate(0.9);
   animation: blue-out 0.5s ease-out forwards;
-  animation-delay: 9.7s;
+  animation-delay: 7.2s;
 }
 .portrait-reveal {
   clip-path: inset(0 0 100% 0);
-  animation: reveal 9.5s cubic-bezier(0.35, 0.05, 0.4, 0.95) 0.5s forwards;
+  animation: reveal 7s cubic-bezier(0.35, 0.05, 0.4, 0.95) 0.5s forwards;
 }
 .scan-sweep {
   top: 0;
@@ -454,7 +454,7 @@ body::after {
   opacity: 0;
   background: linear-gradient(to right, transparent, #7fe6ff 20%, #fff 50%, #7fe6ff 80%, transparent);
   box-shadow: 0 0 18px 3px rgba(34, 197, 234, 0.85), 0 -40px 70px 12px rgba(34, 197, 234, 0.22);
-  animation: sweep 9.5s cubic-bezier(0.35, 0.05, 0.4, 0.95) 0.5s forwards;
+  animation: sweep 7s cubic-bezier(0.35, 0.05, 0.4, 0.95) 0.5s forwards;
 }
 @keyframes reveal {
   to {
