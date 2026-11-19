@@ -32,7 +32,7 @@ export function CommandPalette() {
     const ext = (url: string) => () => window.open(url, "_blank", "noopener,noreferrer");
     return [
       ...navItems.map((n) => ({ id: `nav-${n.id}`, group: "Go to", label: n.label, hint: "Section", run: () => router.push(n.href) })),
-      ...projects.map((p) => ({ id: `p-${p.slug}`, group: "Work", label: p.name, hint: "Opens website", run: ext(p.url) })),
+      ...projects.map((p) => ({ id: `p-${p.slug}`, group: "Work", label: p.name, hint: "View site", run: () => router.push(`/projects/${p.slug}`) })),
       { id: "mail", group: "Connect", label: "Email Ashaduzzaman", hint: profile.email, run: () => (window.location.href = `mailto:${profile.email}`) },
       { id: "li", group: "Connect", label: "LinkedIn", hint: "Opens profile", run: ext(profile.linkedin) },
       { id: "fv", group: "Connect", label: "Fiverr", hint: "Opens profile", run: ext(profile.fiverr) },

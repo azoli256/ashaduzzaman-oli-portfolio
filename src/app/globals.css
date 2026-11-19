@@ -466,3 +466,10 @@ body::after {
     display: none;
   }
 }
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #ffe27a 0%, #ffb62e 55%, #ff8a1f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

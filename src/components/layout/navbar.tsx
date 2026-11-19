@@ -55,11 +55,8 @@ export function Navbar() {
         )}
       >
         <Link href="/" aria-label={`${profile.name} — home`} className="group flex items-center gap-3">
-          <span className="relative grid size-9 place-items-center rounded-xl bg-gradient-to-br from-cyan to-blue font-display text-sm font-extrabold text-[#04202a]">
-            {profile.initials}
-          </span>
-          <span className="hidden font-display text-[0.95rem] font-bold tracking-tight sm:block">
-            {profile.name}
+          <span className="font-display text-base font-extrabold tracking-tight sm:text-[1.05rem]">
+            {profile.name.split(" ")[0]} <span className="text-gradient">{profile.name.split(" ").slice(1).join(" ")}</span>
           </span>
         </Link>
 

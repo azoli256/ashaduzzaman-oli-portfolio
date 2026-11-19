@@ -4,9 +4,8 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { getProject, projects } from "@/data/projects";
 import { buildMetadata } from "@/lib/metadata";
-import { externalProps, hostname } from "@/lib/utils";
-import { ProjectPreview } from "@/components/ui/project-preview";
-import { Button } from "@/components/ui/button";
+import { hostname } from "@/lib/utils";
+import { SiteViewer } from "@/components/ui/site-viewer";
 
 type Params = { slug: string };
 
@@ -50,16 +49,15 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
   const meta = [p.category, p.industry, p.platform, p.projectType].filter(Boolean);
 
   return (
-    <article className="mx-auto max-w-5xl px-5 pb-24 pt-32 sm:px-8 sm:pt-40">
+    <article className="mx-auto max-w-6xl px-5 pb-24 pt-32 sm:px-8 sm:pt-40">
       <Link href="/#work" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-ink-2 hover:text-cyan"><ArrowLeft size={16} /> All work</Link>
       <header className="mt-6">
         {meta.length > 0 && <p className="eyebrow">{meta.join(" · ")}</p>}
         <h1 className="h-hero mt-4">{p.name}</h1>
         <p className="mt-4 text-ink-2">{hostname(p.url)}</p>
-        <div className="mt-7"><Button href={p.url} external>Visit website</Button></div>
       </header>
 
-      <ProjectPreview project={p} priority className="mt-12 aspect-[16/9] rounded-3xl border border-line" />
+      <div className="mt-10"><SiteViewer project={p} /></div>
 
       <div className="mt-12">
         {p.overview && <Block title="Project Overview"><p>{p.overview}</p></Block>}
@@ -76,9 +74,6 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
         ) : null}
         {p.deliverables?.length ? <Block title="Final Deliverables"><List items={p.deliverables} /></Block> : null}
         {p.results?.length ? <Block title="Outcomes"><List items={p.results} /></Block> : null}
-        <Block title="Website">
-          <a href={p.url} {...externalProps} className="inline-flex items-center gap-2 font-semibold text-cyan hover:underline">{p.url}<ArrowUpRight size={16} /><span className="sr-only"> (opens in a new tab)</span></a>
-        </Block>
       </div>
 
       <nav aria-label="Next project" className="mt-12 border-t border-line pt-8">

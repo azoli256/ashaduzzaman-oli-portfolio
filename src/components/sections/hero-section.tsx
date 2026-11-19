@@ -1,3 +1,5 @@
+import { RatingBadge } from "@/components/ui/rating-badge";
+import { metrics } from "@/data/metrics";
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
 import { profile } from "@/data/profile";
@@ -50,6 +52,10 @@ export function HeroSection() {
           <p className="rise mt-5 max-w-md text-base leading-relaxed text-ink-2" style={d(640)}>
             Digital Project Manager and web developer. I turn client goals into shipped websites because I have built them myself.
           </p>
+
+          <div className="mt-6">
+            <RatingBadge rating={metrics.fiverrRating} reviews={metrics.fiverrReviews} href={profile.fiverr} />
+          </div>
 
           <div className="rise mt-6 flex flex-wrap items-center gap-3" style={d(760)}>
             <MagneticButton>

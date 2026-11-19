@@ -25,6 +25,7 @@ export type Metrics = {
   projectsManaged: number;
   developmentProjects: number;
   fiverrReviews: number;
+  fiverrRating: number;
 };
 
 export type ProjectCategory =
@@ -41,6 +42,8 @@ export type Project = {
   /** Public homepage URL only. Never link to admin paths. */
   url: string;
   featured: boolean;
+  /** false = the site refuses to be framed; the viewer then shows the captured screenshot. */
+  embed?: boolean;
   /**
    * Every field below is OPTIONAL and only rendered when present.
    * Add details only after the owner has confirmed them.

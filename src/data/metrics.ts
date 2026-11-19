@@ -11,6 +11,7 @@ export const metrics: Metrics = {
   projectsManaged: 400,
   developmentProjects: 2300,
   fiverrReviews: 1700,
+  fiverrRating: 4.9,
 };
 
 export const formatMetric = (n: number) => `${n.toLocaleString("en-US")}+`;

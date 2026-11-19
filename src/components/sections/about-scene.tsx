@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useRef } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -166,8 +168,8 @@ export function AboutScene({ paragraphs, eyebrow, heading }: { paragraphs: strin
               ))}
             </svg>
 
-            <div data-core className="absolute left-1/2 top-1/2 grid size-[26%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-gradient-to-br from-[#16324a] to-[#0c1525]">
-              <span className="text-gradient font-display text-[clamp(2rem,6vw,3.6rem)] font-extrabold tracking-tighter">AO</span>
+            <div data-core className="absolute left-1/2 top-1/2 size-[30%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full border-2 border-cyan/60 bg-gradient-to-br from-[#16324a] to-[#0c1525] shadow-[0_0_60px_-8px_rgba(34,197,234,0.6)]">
+              <Image src="/images/oli.webp" alt="Ashaduzzaman Oli" width={725} height={1290} sizes="(min-width:1024px) 12rem, 30vw" className="absolute left-1/2 top-[3%] h-[250%] w-auto max-w-none -translate-x-1/2 object-cover object-top" />
             </div>
 
             {sats.map((s) => (
