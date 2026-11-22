@@ -19,7 +19,7 @@ export const projects: Project[] = [
   { slug: "epoxy-pads", name: "Epoxy Pads", url: "https://epoxypads.com/", image: "/images/projects/epoxy-pads.webp", imageAlt: "Homepage screenshot of the Epoxy Pads website", featured: false, embed: false, hue: 260 },
   { slug: "systems-building-leader", name: "Systems Building Leader", url: "https://systemsbuildingleader.org/", image: "/images/projects/systems-building-leader.webp", imageAlt: "Homepage screenshot of the Systems Building Leader website", featured: false, hue: 185 },
   { slug: "lumy-inserts", name: "Lumy Inserts", url: "https://lumyinserts.com/", image: "/images/projects/lumy-inserts.webp", imageAlt: "Homepage screenshot of the Lumy Inserts website", featured: false, hue: 240 },
-  { slug: "troy-landing", name: "Troy Landing", url: "https://troy-landing.vercel.app/", image: "/images/projects/troy-landing.webp", imageAlt: "Homepage screenshot of the Troy Landing (Business Efficiency Group) website", featured: false, embed: false, hue: 205 },
+  { slug: "troy-landing", name: "Troy", url: "https://troy-landing.vercel.app/", image: "/images/projects/troy-landing.webp", imageAlt: "Homepage screenshot of the Troy (Business Efficiency Group) website", featured: false, embed: false, hue: 205 },
 ];
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
