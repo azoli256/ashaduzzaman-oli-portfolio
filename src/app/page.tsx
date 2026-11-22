@@ -22,9 +22,9 @@ export default function HomePage() {
       <AboutSection />
       <ExpertiseSection />
       <TechnicalAdvantageSection />
+      <ExperienceSection />
       <FeaturedProjectsSection />
       <WorkflowSection />
-      <ExperienceSection />
       <TestimonialsSection />
       <FaqSection />
       <ContactSection />

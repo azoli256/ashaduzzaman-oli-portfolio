@@ -26,7 +26,7 @@ export function Navbar() {
   useEffect(() => {
     if (!isHome) return;
     // Sections without their own nav entry belong to the nav item above them.
-    const owner: Record<string, string> = { impact: "", advantage: "expertise", trust: "experience" };
+    const owner: Record<string, string> = { impact: "", advantage: "expertise", trust: "approach" };
     const ids = [...navItems.map((n) => n.id), ...Object.keys(owner)];
     const sections = ids
       .map((id) => document.getElementById(id))

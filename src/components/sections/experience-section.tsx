@@ -8,7 +8,7 @@ export function ExperienceSection() {
       <div aria-hidden className="absolute -right-40 top-1/4 -z-10 size-[30rem] rounded-full bg-blue/10 blur-[120px]" />
       <div className="site-w">
         <div>
-          <SectionHeading id="experience-title" index="07" eyebrow="Experience" title={<>My Professional <span className="text-gradient">Journey.</span></>} text="Two tracks running in parallel: I keep building and consulting while leading projects." />
+          <SectionHeading id="experience-title" index="05" eyebrow="Experience" title={<>My Professional <span className="text-gradient">Journey.</span></>} text="Two tracks running in parallel: I keep building and consulting while leading projects." />
         </div>
         <ExperienceGraph items={experience} />
       </div>
