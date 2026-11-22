@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useInView, useMotionValueEvent, useScroll, useSpring, useTransform } from "motion/react";
+import { AnimatePresence, motion, useInView, useMotionValueEvent, animate, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { PillarItem } from "@/types";
 import { cn } from "@/lib/utils";
@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const R = 166; // progress ring radius in a 520 box
 const RL = 236; // radius where stage labels sit, outside every ring
 const C = 260; // dial centre
-const AUTO_MS = 6000; // time each stage stays active
+const AUTO_MS = 4000; // time the ball takes to travel from one stage to the next
 
 /**
  * Desktop scroll story as a control dial. The section is tall and the stage is `position: sticky`,
@@ -24,12 +24,8 @@ export function WorkflowPinned({ steps }: { steps: PillarItem[] }) {
   const [pos, setPos] = useState(0);
   const [tick, setTick] = useState(0);
   const active = ((pos % n) + n) % n;
-  const ang = useSpring(0, { stiffness: 42, damping: 13, mass: 1 });
+  const ang = useMotionValue(0);
   const lastP = useRef(0);
-
-  useEffect(() => {
-    ang.set((pos * 360) / n);
-  }, [pos, n, ang]);
 
   const pick = useCallback(
     (i: number, shortest: boolean) => {
@@ -51,13 +47,36 @@ export function WorkflowPinned({ steps }: { steps: PillarItem[] }) {
     pick(Math.min(n - 1, Math.max(0, Math.floor(v * n))), true);
   });
 
-  // auto-advance every 6 seconds while the dial is on screen
+  // the ball glides at a constant speed from one node to the next; it arrives exactly when the stage changes
   useEffect(() => {
-    if (!inView) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setTimeout(() => setPos((p) => p + 1), AUTO_MS);
-    return () => window.clearTimeout(id);
-  }, [inView, pos, tick]);
+    const step = 360 / n;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!inView || reduce) {
+      ang.set(pos * step);
+      return;
+    }
+    let stopped = false;
+    let ctl: { stop: () => void } | undefined;
+    const run = () => {
+      ctl = animate(ang, (pos + 1) * step, {
+        duration: AUTO_MS / 1000,
+        ease: "linear",
+        onComplete: () => {
+          if (!stopped) setPos((p) => p + 1);
+        },
+      });
+    };
+    if (Math.abs(ang.get() - pos * step) > 0.5) {
+      // user jumped to a stage: glide there first, then carry on
+      ctl = animate(ang, pos * step, { duration: 0.9, ease: [0.4, 0, 0.2, 1], onComplete: () => !stopped && run() });
+    } else {
+      run();
+    }
+    return () => {
+      stopped = true;
+      ctl?.stop();
+    };
+  }, [inView, pos, tick, n, ang]);
 
   // pointer tilt for depth
   const rx = useSpring(0, { stiffness: 120, damping: 18 });
