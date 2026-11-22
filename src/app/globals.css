@@ -522,3 +522,9 @@ body::after {
 }
 @keyframes dial-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .dial-radar { animation: none; } }
+
+.seg-fill { animation: seg-fill linear forwards; }
+@keyframes seg-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.dial-ball-pulse { transform-box: fill-box; transform-origin: center; animation: ball-pulse 1.8s ease-in-out infinite; }
+@keyframes ball-pulse { 0%,100% { transform: scale(0.8); opacity: 0.1; } 50% { transform: scale(1.25); opacity: 0.25; } }
+@media (prefers-reduced-motion: reduce) { .seg-fill, .dial-ball-pulse { animation: none; } }

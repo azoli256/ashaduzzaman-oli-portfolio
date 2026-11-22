@@ -1,13 +1,14 @@
 "use client";
 
-import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring, useTransform } from "motion/react";
-import { useRef, useState } from "react";
+import { AnimatePresence, motion, useInView, useMotionValueEvent, useScroll, useSpring, useTransform } from "motion/react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { PillarItem } from "@/types";
 import { cn } from "@/lib/utils";
 
 const R = 166; // progress ring radius in a 520 box
 const RL = 236; // radius where stage labels sit, outside every ring
 const C = 260; // dial centre
+const AUTO_MS = 6000; // time each stage stays active
 
 /**
  * Desktop scroll story as a control dial. The section is tall and the stage is `position: sticky`,
@@ -16,31 +17,57 @@ const C = 260; // dial centre
 export function WorkflowPinned({ steps }: { steps: PillarItem[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.4 });
-  const sweep = useTransform(smooth, [0, 1], [0.0001, 1]);
-  const packetDeg = useTransform(smooth, [0, 1], [0, 360]);
-  const [active, setActive] = useState(0);
+  const stickyRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(stickyRef, { amount: 0.6 });
+  const n = steps.length;
+  // `pos` only ever counts forward on autoplay, so the ball keeps circling the ring in one direction.
+  const [pos, setPos] = useState(0);
+  const [tick, setTick] = useState(0);
+  const active = ((pos % n) + n) % n;
+  const ang = useSpring(0, { stiffness: 42, damping: 13, mass: 1 });
+  const lastP = useRef(0);
+
+  useEffect(() => {
+    ang.set((pos * 360) / n);
+  }, [pos, n, ang]);
+
+  const pick = useCallback(
+    (i: number, shortest: boolean) => {
+      setPos((p) => {
+        const cur = ((p % n) + n) % n;
+        let d = (i - cur + n) % n;
+        if (shortest && d > n / 2) d -= n;
+        return p + d;
+      });
+      setTick((t) => t + 1);
+    },
+    [n],
+  );
+
+  // scroll still works: moving the page selects the matching stage
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    if (Math.abs(v - lastP.current) < 0.004) return;
+    lastP.current = v;
+    pick(Math.min(n - 1, Math.max(0, Math.floor(v * n))), true);
+  });
+
+  // auto-advance every 6 seconds while the dial is on screen
+  useEffect(() => {
+    if (!inView) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setTimeout(() => setPos((p) => p + 1), AUTO_MS);
+    return () => window.clearTimeout(id);
+  }, [inView, pos, tick]);
 
   // pointer tilt for depth
   const rx = useSpring(0, { stiffness: 120, damping: 18 });
   const ry = useSpring(0, { stiffness: 120, damping: 18 });
 
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const i = Math.min(steps.length - 1, Math.max(0, Math.floor(v * steps.length)));
-    setActive((cur) => (cur === i ? cur : i));
-  });
-
-  const go = (i: number) => {
-    const el = ref.current;
-    if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY;
-    const span = el.offsetHeight - window.innerHeight;
-    window.scrollTo({ top: top + (span * (i + 0.5)) / steps.length, behavior: "smooth" });
-  };
+  const go = (i: number) => pick(i, false);
+  const trailDeg = useTransform(ang, (v) => v - 162);
 
   const s = steps[active] ?? steps[0];
   if (!s) return null;
-  const n = steps.length;
   const nodeAt = (i: number) => {
     const a = ((-90 + (i * 360) / n) * Math.PI) / 180;
     return { x: C + R * Math.cos(a), y: C + R * Math.sin(a), a };
@@ -48,7 +75,7 @@ export function WorkflowPinned({ steps }: { steps: PillarItem[] }) {
 
   return (
     <div ref={ref} style={{ height: `${n * 48}vh` }} className="relative">
-      <div className="sticky top-0 flex h-screen items-center">
+      <div ref={stickyRef} className="sticky top-0 flex h-screen items-center">
         <div className="site-w grid grid-cols-12 items-center gap-10">
           {/* stage card */}
           <div className="col-span-6">
@@ -75,7 +102,13 @@ export function WorkflowPinned({ steps }: { steps: PillarItem[] }) {
               </div>
               <div className="relative mt-8 flex gap-1.5" aria-hidden>
                 {steps.map((st, i) => (
-                  <span key={st.title} className={cn("h-1 flex-1 rounded-full transition-colors duration-500", i <= active ? "bg-gradient-to-r from-cyan to-blue" : "bg-white/10")} />
+                  <span key={st.title} className="relative h-1 flex-1 overflow-hidden rounded-full bg-white/10">
+                    <span
+                      key={i === active ? `a${pos}` : `s${i}`}
+                      className={cn("absolute inset-0 origin-left rounded-full bg-gradient-to-r from-cyan to-blue", i === active && inView && "seg-fill")}
+                      style={{ transform: i < active || (i === active && !inView) ? "scaleX(1)" : "scaleX(0)", animationDuration: `${AUTO_MS}ms` }}
+                    />
+                  </span>
                 ))}
               </div>
             </div>
@@ -117,9 +150,12 @@ export function WorkflowPinned({ steps }: { steps: PillarItem[] }) {
                   return <line key={i} x1={C + 118 * Math.cos(a)} y1={C + 118 * Math.sin(a)} x2={C + (R - 24) * Math.cos(a)} y2={C + (R - 24) * Math.sin(a)} stroke="#82a0c8" strokeOpacity="0.22" strokeDasharray="2 4" />;
                 })}
                 <circle cx={C} cy={C} r={R} fill="none" stroke="#82a0c8" strokeOpacity="0.2" strokeWidth="2" />
-                <motion.circle cx={C} cy={C} r={R} fill="none" stroke="url(#dial-grad)" strokeWidth="4" strokeLinecap="round" transform={`rotate(-90 ${C} ${C})`} style={{ pathLength: sweep }} />
-                <motion.g style={{ rotate: packetDeg, originX: `${C}px`, originY: `${C}px` }}>
-                  <circle cx={C} cy={C - R} r="14" fill="#22c5ea" opacity="0.25" />
+                <motion.g style={{ rotate: trailDeg, originX: 0.5, originY: 0.5, transformBox: "view-box" }}>
+                  <circle cx={C} cy={C} r={R} fill="none" stroke="url(#dial-grad)" strokeWidth="5" strokeLinecap="round" pathLength={1} strokeDasharray="0.2 0.8" />
+                </motion.g>
+                <motion.g style={{ rotate: ang, originX: 0.5, originY: 0.5, transformBox: "view-box" }}>
+                  <circle cx={C} cy={C - R} r="22" fill="#22c5ea" opacity="0.14" className="dial-ball-pulse" />
+                  <circle cx={C} cy={C - R} r="12" fill="#22c5ea" opacity="0.35" />
                   <circle cx={C} cy={C - R} r="6" fill="#fff" />
                 </motion.g>
                 <circle cx={C} cy={C} r="118" fill="rgba(10,18,32,0.7)" stroke="#22c5ea" strokeOpacity="0.25" />
