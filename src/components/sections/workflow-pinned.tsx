@@ -5,7 +5,8 @@ import { useRef, useState } from "react";
 import type { PillarItem } from "@/types";
 import { cn } from "@/lib/utils";
 
-const R = 190; // dial radius in a 520 box
+const R = 166; // progress ring radius in a 520 box
+const RL = 236; // radius where stage labels sit, outside every ring
 const C = 260; // dial centre
 
 /**
@@ -94,7 +95,7 @@ export function WorkflowPinned({ steps }: { steps: PillarItem[] }) {
               ry.set(0);
             }}
           >
-            <motion.div style={{ rotateX: rx, rotateY: ry }} className="relative mx-auto aspect-square w-full max-w-[34rem] [transform-style:preserve-3d]">
+            <motion.div style={{ rotateX: rx, rotateY: ry }} className="relative mx-auto aspect-square w-full max-w-[30rem] [transform-style:preserve-3d]">
               <svg viewBox="0 0 520 520" className="absolute inset-0 size-full" aria-hidden>
                 <defs>
                   <linearGradient id="dial-grad" x1="0" y1="0" x2="1" y2="1">
@@ -108,30 +109,37 @@ export function WorkflowPinned({ steps }: { steps: PillarItem[] }) {
                 </defs>
                 <circle cx={C} cy={C} r="260" fill="url(#dial-halo)" />
                 <g className="dial-ticks">
-                  <circle cx={C} cy={C} r="248" fill="none" stroke="#a6b5c9" strokeOpacity="0.35" strokeWidth="8" strokeDasharray="1.5 10.2" />
+                  <circle cx={C} cy={C} r="214" fill="none" stroke="#a6b5c9" strokeOpacity="0.3" strokeWidth="7" strokeDasharray="1.4 8.5" />
                 </g>
-                <circle cx={C} cy={C} r="226" fill="none" stroke="#518bff" strokeOpacity="0.22" strokeDasharray="3 8" />
+                <circle cx={C} cy={C} r="194" fill="none" stroke="#518bff" strokeOpacity="0.2" strokeDasharray="3 9" />
+                {steps.map((_, i) => {
+                  const a = ((-90 + (i * 360) / n) * Math.PI) / 180;
+                  return <line key={i} x1={C + 118 * Math.cos(a)} y1={C + 118 * Math.sin(a)} x2={C + (R - 24) * Math.cos(a)} y2={C + (R - 24) * Math.sin(a)} stroke="#82a0c8" strokeOpacity="0.22" strokeDasharray="2 4" />;
+                })}
                 <circle cx={C} cy={C} r={R} fill="none" stroke="#82a0c8" strokeOpacity="0.2" strokeWidth="2" />
                 <motion.circle cx={C} cy={C} r={R} fill="none" stroke="url(#dial-grad)" strokeWidth="4" strokeLinecap="round" transform={`rotate(-90 ${C} ${C})`} style={{ pathLength: sweep }} />
                 <motion.g style={{ rotate: packetDeg, originX: `${C}px`, originY: `${C}px` }}>
                   <circle cx={C} cy={C - R} r="14" fill="#22c5ea" opacity="0.25" />
                   <circle cx={C} cy={C - R} r="6" fill="#fff" />
                 </motion.g>
-                <circle cx={C} cy={C} r="132" fill="none" stroke="#fff" strokeOpacity="0.06" />
+                <circle cx={C} cy={C} r="118" fill="rgba(10,18,32,0.7)" stroke="#22c5ea" strokeOpacity="0.25" />
               </svg>
 
+              {/* radar sweep behind the read-out */}
+              <div aria-hidden className="dial-radar pointer-events-none absolute inset-[27.3%] rounded-full" />
+
               {/* centre read-out */}
-              <div className="absolute left-1/2 top-1/2 grid w-[44%] -translate-x-1/2 -translate-y-1/2 place-items-center text-center">
-                <span className="num-xl text-gradient block text-[clamp(3.4rem,6vw,5.4rem)]">0{active + 1}</span>
-                <span className="mt-2 font-display text-base font-bold leading-tight tracking-tight text-ink-2">{s.title}</span>
+              <div className="absolute left-1/2 top-1/2 grid w-[40%] -translate-x-1/2 -translate-y-1/2 place-items-center text-center">
+                <span className="font-mono text-[0.62rem] uppercase tracking-[0.3em] text-cyan/80">Stage</span>
+                <span className="num-xl text-gradient block text-[clamp(3rem,5.4vw,4.8rem)] leading-none">0{active + 1}</span>
+                <span className="mt-2 font-display text-sm font-bold leading-tight tracking-tight text-ink-2">{s.title}</span>
+                <span className="mt-1 font-mono text-[0.62rem] tracking-widest text-muted">{String(active + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}</span>
               </div>
 
               {/* nodes */}
               {steps.map((st, i) => {
                 const p = nodeAt(i);
                 const on = i === active;
-                const right = Math.cos(p.a) > 0.2;
-                const left = Math.cos(p.a) < -0.2;
                 return (
                   <div key={st.title} className="absolute h-0 w-0" style={{ left: `${(p.x / 520) * 100}%`, top: `${(p.y / 520) * 100}%` }}>
                     <button
@@ -143,13 +151,34 @@ export function WorkflowPinned({ steps }: { steps: PillarItem[] }) {
                     >
                       0{i + 1}
                     </button>
-                    <span
-                      aria-hidden
-                      className={cn("pointer-events-none absolute whitespace-nowrap font-display text-sm font-bold tracking-tight transition-colors duration-300", on ? "text-ink" : "text-muted", right ? "left-8 top-0 -translate-y-1/2" : left ? "right-8 top-0 -translate-y-1/2" : p.y < C ? "-top-12 left-0 -translate-x-1/2" : "top-9 left-0 -translate-x-1/2")}
-                    >
-                      {st.title}
-                    </span>
                   </div>
+                );
+              })}
+
+              {/* stage labels, outside the rings so they never collide with them */}
+              {steps.map((st, i) => {
+                const a = ((-90 + (i * 360) / n) * Math.PI) / 180;
+                const lx = C + RL * Math.cos(a);
+                const ly = C + RL * Math.sin(a);
+                const on = i === active;
+                const right = Math.cos(a) > 0.2;
+                const left = Math.cos(a) < -0.2;
+                return (
+                  <button
+                    key={`l-${st.title}`}
+                    type="button"
+                    tabIndex={-1}
+                    aria-hidden
+                    onClick={() => go(i)}
+                    style={{ left: `${(lx / 520) * 100}%`, top: `${(ly / 520) * 100}%` }}
+                    className={cn(
+                      "absolute z-10 whitespace-nowrap rounded-full border px-3 py-1 font-display text-[0.8rem] font-bold tracking-tight backdrop-blur transition-all duration-300",
+                      right ? "-translate-y-1/2" : left ? "-translate-x-full -translate-y-1/2" : ly < C ? "-translate-x-1/2 -translate-y-full" : "-translate-x-1/2",
+                      on ? "border-cyan/60 bg-cyan/15 text-ink shadow-[0_0_24px_rgba(34,197,234,0.35)]" : i < active ? "border-cyan/25 bg-bg/70 text-ink-2" : "border-line bg-bg/60 text-muted hover:text-ink-2",
+                    )}
+                  >
+                    {st.title}
+                  </button>
                 );
               })}
             </motion.div>

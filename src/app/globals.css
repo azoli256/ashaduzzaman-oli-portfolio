@@ -514,3 +514,11 @@ body::after {
     height: auto;
   }
 }
+
+.dial-radar {
+  background: conic-gradient(from 0deg, rgba(34, 197, 234, 0) 0deg, rgba(34, 197, 234, 0.22) 60deg, rgba(34, 197, 234, 0) 61deg);
+  animation: dial-spin 7s linear infinite;
+  mask-image: radial-gradient(circle, transparent 0 58%, #000 59%);
+}
+@keyframes dial-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .dial-radar { animation: none; } }
